@@ -6,7 +6,7 @@ using UnityEngine;
 public class RotateCamera : MonoBehaviour {
  
     public Transform target;
-    public float distance = 5.0f;
+    public float distance = 10f;
     public float xSpeed = 120.0f;
     public float ySpeed = 120.0f;
 
@@ -14,7 +14,10 @@ public class RotateCamera : MonoBehaviour {
     public float yMaxLimit = 80f;
 
     public float distanceMin = .5f;
-    public float distanceMax = 15f;
+    public float distanceMax = 20f;
+
+    Vector3 point;
+    float zoomspeed = 5.0f;
 
     private Rigidbody rigidbody;
 
@@ -27,6 +30,7 @@ public class RotateCamera : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
         Vector3 angles = transform.eulerAngles;
         x = angles.y;
         y = angles.x;
@@ -66,6 +70,7 @@ public class RotateCamera : MonoBehaviour {
             transform.rotation = rotation;
             transform.position = position;
         }
+        
     }
 
     public static float ClampAngle(float angle, float min, float max)
@@ -117,3 +122,4 @@ public class RotateCamera : MonoBehaviour {
         }
     }
 }
+
