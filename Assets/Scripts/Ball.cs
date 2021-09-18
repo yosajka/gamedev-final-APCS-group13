@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     //Vector3 z_negative = new Vector3 (0,0,-1);
 
     bool isGrounded;
+    bool movable = true;
 
     private Vector3 mOffset;
 
@@ -89,15 +90,37 @@ public class Ball : MonoBehaviour
 
     void SlideBall(Vector3 direction)
     {
-       
-        transform.position = transform.position + direction * 2;
-        transform.Rotate(direction*45f, Space.World);
-        Debug.Log(isGrounded);
-        if (isGrounded == false)
+        movable = true;
+        int i = 0;
+        while (movable) 
         {
-            Vector3 position = transform.position;
-            transform.position = new Vector3 (position.x, position.y - 2, position.z);
+            if (Physics.Raycast(transform.position, direction, 2f))
+            {
+                Debug.DrawRay(transform.position, direction, Color.yellow);
+                Debug.Log("Hit");
+                movable = false;
+                break;
+            }
+            else
+            {
+                Debug.DrawRay(transform.position, direction, Color.yellow);
+            }
+            
+            transform.position = transform.position + direction * 2;
+            transform.Rotate(direction*45f, Space.World);
+            //System.Threading.Thread.Sleep(1000);
+            // for debug purpose
+            if (i == 1)
+                break;
+            i++;
         }
+        
+        // Debug.Log(isGrounded);
+        // if (isGrounded == false)
+        // {
+        //     Vector3 position = transform.position;
+        //     transform.position = new Vector3 (position.x, position.y - 2, position.z);
+        // }
         
         // Rotate the ball to make it feel like rolling
         
