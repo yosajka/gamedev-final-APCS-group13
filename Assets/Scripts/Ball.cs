@@ -7,6 +7,8 @@ public class Ball : MonoBehaviour
     Rigidbody _rigidBody;
     
     Vector3 _startPosition;
+    Vector3 direction;
+    Vector3 _currentPosition;
     
     //[SerializeField] float _launchForce = 100;
 
@@ -63,25 +65,37 @@ public class Ball : MonoBehaviour
     }
 
 
-    void OnMouseUp()
+    IEnumerator  OnMouseUp()
     {
-        Vector3 direction = (GetMouseAsWorldPoint() + mOffset - transform.position).normalized;
+        direction = (GetMouseAsWorldPoint() + mOffset - transform.position).normalized;
         
         direction = GetXorZDirection(direction);
-        int i = 1;
-        while (i > 0)
+        
+        movable = true;
+        
+        while (movable) 
         {
+            if (Physics.Raycast(_currentPosition, direction, 2f))
+            {
+                Debug.Log("Hit obstacle");
+                movable = false;
+                break;
+            }
+            else
+            {
+                movable = true;
+            }
+            
             SlideBall(direction);
-            //yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
 
-            // if (!isGrounded)
-            // {
-            //     Vector3 position = transform.position;
-            //     transform.position = new Vector3 (position.x, position.y-1,position.z);
-            //     yield return new WaitForSeconds(0.1f);
-            // }
-
-            i--;
+            isGrounded = IsOnGround();
+            
+            if (isGrounded == false)
+            {
+                GoDown();
+            }
+            yield return new WaitForSeconds(0.05f);
         }
         
         Debug.Log(direction);
@@ -90,44 +104,33 @@ public class Ball : MonoBehaviour
 
     void SlideBall(Vector3 direction)
     {
-        movable = true;
-        int i = 0;
-        while (movable) 
+        //movable = true;
+        transform.position = transform.position + direction * 2;
+        transform.Rotate(direction*45f, Space.World);
+        
+    }
+
+    void GoDown()
+    {
+        //Vector3 y_direction = new Vector3 (0f, -1f, 0f);
+        transform.position = transform.position - Vector3.up * 2;
+        transform.Rotate(-Vector3.up*45f, Space.World);
+    }
+
+    bool IsOnGround()
+    {
+        RaycastHit hit;
+        Ray downRay = new Ray(_currentPosition, -Vector3.up);
+
+        if (Physics.Raycast(downRay, out hit))
         {
-            if (Physics.Raycast(transform.position, direction, 2f))
+    
+            if (hit.distance > 2f)
             {
-                Debug.DrawRay(transform.position, direction, Color.yellow);
-                Debug.Log("Hit");
-                movable = false;
-                break;
+               return false;
             }
-            else
-            {
-                Debug.DrawRay(transform.position, direction, Color.yellow);
-            }
-            
-            transform.position = transform.position + direction * 2;
-            transform.Rotate(direction*45f, Space.World);
-            //System.Threading.Thread.Sleep(1000);
-            // for debug purpose
-            if (i == 1)
-                break;
-            i++;
         }
-        
-        // Debug.Log(isGrounded);
-        // if (isGrounded == false)
-        // {
-        //     Vector3 position = transform.position;
-        //     transform.position = new Vector3 (position.x, position.y - 2, position.z);
-        // }
-        
-        // Rotate the ball to make it feel like rolling
-        
-           
-        
-        
-        //yield return new WaitForSeconds(0.5f);
+        return true;
     }
 
     Vector3 GetXorZDirection(Vector3 direction)
@@ -144,20 +147,21 @@ public class Ball : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if(col.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+        
     }
  
     void OnTriggerExit(Collider col)
     {
-        Debug.Log("Ground");
-        if(col.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
         
+        
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == "FinishBox")
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionExit(Collision col)
@@ -165,17 +169,7 @@ public class Ball : MonoBehaviour
         
     }
 
-    // void OnTriggerEnter(Collider col)
-    // {
-    //     if(col.CompareTag("Ground"))
-    //     {
-    //         isGrounded = true;
-    //     }
-    //     _rigidBody.isKinematic = true;
-    // }
-   
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (transform.position.y < 0 || transform.position.y > 10) 
@@ -183,6 +177,7 @@ public class Ball : MonoBehaviour
             Destroy(gameObject);
         }
        
+        _currentPosition = transform.position;
         
     }
 
