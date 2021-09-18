@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     Rigidbody _rigidBody;
-    
+    //public AudioSource clapSound;
     Vector3 _startPosition;
     Vector3 direction;
     Vector3 _currentPosition;
@@ -160,7 +160,8 @@ public class Ball : MonoBehaviour
     {
         if (col.tag == "FinishBox")
         {
-            Destroy(gameObject);
+            GetComponent<AudioSource>().Play();
+            gameObject.SetActive(false);
         }
     }
 
