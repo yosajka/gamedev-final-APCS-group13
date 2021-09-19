@@ -216,7 +216,6 @@ public class Ball : MonoBehaviour
                 Debug.Log("hit");
                 winningSound.Play();
                 transform.position = transform.position + direction * 2;
-                transform.Rotate(direction * 30f, Space.World);
                 IngameCanvas.SetActive(false);
                 WinCanvas.SetActive(true);
                 //gameObject.SetActive(false);
