@@ -5306,6 +5306,7 @@ MonoBehaviour:
   ball: {fileID: 1127101223}
   finishBox: {fileID: 1048480701}
   winCanvas: {fileID: 1965548279}
+  ingameCanvas: {fileID: 644615088}
 --- !u!1001 &756602441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7484,6 +7485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winningSound: {fileID: 0}
+  ballRolling: {fileID: 0}
   IngameCanvas: {fileID: 644615088}
   WinCanvas: {fileID: 1965548279}
   isOnWhiteBox: 0
@@ -11143,6 +11145,7 @@ MonoBehaviour:
   ball: {fileID: 1127101223}
   finishBox: {fileID: 1048480701}
   winCanvas: {fileID: 0}
+  ingameCanvas: {fileID: 0}
 --- !u!1001 &1758910129
 PrefabInstance:
   m_ObjectHideFlags: 0

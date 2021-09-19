@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.83115137, g: 0.5020659, b: 0.6355848, a: 1}
+  m_IndirectSpecularColor: {r: 0.83115137, g: 0.5020659, b: 0.63558495, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8649,6 +8649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winningSound: {fileID: 0}
+  ballRolling: {fileID: 0}
   IngameCanvas: {fileID: 1812125806}
   WinCanvas: {fileID: 519049936}
   isOnWhiteBox: 0
@@ -15182,6 +15183,7 @@ MonoBehaviour:
   ball: {fileID: 1024594274}
   finishBox: {fileID: 405635134}
   winCanvas: {fileID: 519049936}
+  ingameCanvas: {fileID: 1812125806}
 --- !u!1001 &1891370616
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.83115137, g: 0.5020659, b: 0.6355848, a: 1}
+  m_IndirectSpecularColor: {r: 0.83115137, g: 0.5020659, b: 0.63558495, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6124,6 +6124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 1897278994}
   finishBox: {fileID: 1330115270}
+  winCanvas: {fileID: 207582133}
+  ingameCanvas: {fileID: 717053910}
 --- !u!4 &702284498
 Transform:
   m_ObjectHideFlags: 0
@@ -6390,6 +6392,108 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.019999996, z: 0.019999996}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &717053909
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870776, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814261852748870788, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+      propertyPath: m_Name
+      value: WinCanvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+--- !u!1 &717053910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6814261852748870788, guid: 4ecb6fa0b43f4124ba5226dc2564b750, type: 3}
+  m_PrefabInstance: {fileID: 717053909}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &758201404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16902,6 +17006,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winningSound: {fileID: 0}
+  ballRolling: {fileID: 0}
+  IngameCanvas: {fileID: 207582133}
+  WinCanvas: {fileID: 717053910}
   isOnWhiteBox: 0
 --- !u!135 &1897278996
 SphereCollider:

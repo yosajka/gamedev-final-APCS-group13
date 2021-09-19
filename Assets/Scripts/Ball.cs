@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public AudioSource winningSound;
+    public AudioSource ballRolling;
     public GameObject IngameCanvas;
     public GameObject WinCanvas;
     Rigidbody _rigidBody;
@@ -26,7 +27,7 @@ public class Ball : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody>();
         winningSound = GetComponent<AudioSource>();
-        
+        ballRolling = gameObject.AddComponent<AudioSource>();
     }
     void Start()
     {
