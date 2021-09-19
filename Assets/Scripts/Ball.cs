@@ -27,7 +27,6 @@ public class Ball : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody>();
         winningSound = GetComponent<AudioSource>();
-        ballRolling = gameObject.AddComponent<AudioSource>();
     }
     void Start()
     {
@@ -119,7 +118,7 @@ public class Ball : MonoBehaviour
         //movable = true;
         transform.position = transform.position + direction * 2;
         transform.Rotate(direction*30f, Space.World);
-        
+        ballRolling.Play();
     }
 
     void GoDown()
@@ -217,7 +216,6 @@ public class Ball : MonoBehaviour
                 Debug.Log("hit");
                 winningSound.Play();
                 transform.position = transform.position + direction * 2;
-                transform.Rotate(direction * 30f, Space.World);
                 IngameCanvas.SetActive(false);
                 WinCanvas.SetActive(true);
                 //gameObject.SetActive(false);
