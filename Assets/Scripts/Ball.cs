@@ -5,18 +5,15 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     Rigidbody _rigidBody;
-    //public AudioSource clapSound;
+    
     Vector3 _startPosition;
     Vector3 direction;
     Vector3 _currentPosition;
     
-    //[SerializeField] float _launchForce = 100;
-
-    //Vector3 z_positive = new Vector3 (0,0,1);
-    //Vector3 z_negative = new Vector3 (0,0,-1);
-
-    bool isGrounded;
-    bool movable = true;
+    
+    bool isOnGround;
+    bool isNotBlocked = true;
+    public bool isOnWhiteBox;
 
     private Vector3 mOffset;
 
@@ -71,34 +68,45 @@ public class Ball : MonoBehaviour
         
         direction = GetXorZDirection(direction);
         
-        movable = true;
+        isNotBlocked = true;
         
-        while (movable) 
+        while (isNotBlocked && isOnWhiteBox == false) 
         {
             if (Physics.Raycast(_currentPosition, direction, 2f))
             {
-                Debug.Log("Hit obstacle");
-                movable = false;
+                Debug.Log("Ball hit obstacle");
+                isNotBlocked = false;
                 break;
             }
             else
             {
-                movable = true;
+                isNotBlocked = true;
             }
             
             SlideBall(direction);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.08f);
 
-            isGrounded = IsOnGround();
+            //isGrounded = IsOnGround();
             
-            if (isGrounded == false)
+            RaycastHit hit;
+            Ray downRay = new Ray(_currentPosition, -Vector3.up);
+
+            if (Physics.Raycast(downRay, out hit))
             {
-                GoDown();
+        
+                while (hit.distance > 2f)
+                {
+                    //Debug.Log(hit.distance);
+                    GoDown();
+                    transform.Rotate(direction*30f, Space.World);
+                    yield return new WaitForSeconds(0.08f);
+                    hit.distance -= 2;
+                }
+                
             }
-            yield return new WaitForSeconds(0.05f);
         }
         
-        Debug.Log(direction);
+        //Debug.Log(direction);
         
     }
 
@@ -106,7 +114,7 @@ public class Ball : MonoBehaviour
     {
         //movable = true;
         transform.position = transform.position + direction * 2;
-        transform.Rotate(direction*45f, Space.World);
+        transform.Rotate(direction*30f, Space.World);
         
     }
 
@@ -152,7 +160,11 @@ public class Ball : MonoBehaviour
  
     void OnTriggerExit(Collider col)
     {
-        
+        if (col.tag == "WhiteBox")
+        {
+            
+            isOnWhiteBox = false;
+        }
         
     }
 
@@ -160,8 +172,13 @@ public class Ball : MonoBehaviour
     {
         if (col.tag == "FinishBox")
         {
-            GetComponent<AudioSource>().Play();
+            //GetComponent<AudioSource>().Play();
             gameObject.SetActive(false);
+        }
+        if (col.tag == "WhiteBox")
+        {
+            Debug.Log("Ball Collide with whitebox");
+            isOnWhiteBox = true;
         }
     }
 
@@ -173,9 +190,9 @@ public class Ball : MonoBehaviour
     
     void Update()
     {
-        if (transform.position.y < 0 || transform.position.y > 10) 
+        if (transform.position.y < 0) 
         {
-            Destroy(gameObject);
+            transform.position = new Vector3 (transform.position.x, 0, transform.position.z);
         }
        
         _currentPosition = transform.position;

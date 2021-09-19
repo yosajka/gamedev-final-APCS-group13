@@ -16,7 +16,8 @@ public class CartonBox : MonoBehaviour
     //Vector3 z_negative = new Vector3 (0,0,-1);
 
     bool isGrounded;
-    bool movable = true;
+    bool isNotBlock = true;
+    public bool isOnWhiteBox;
 
     private Vector3 mOffset;
 
@@ -71,34 +72,45 @@ public class CartonBox : MonoBehaviour
         
         direction = GetXorZDirection(direction);
         
-        movable = true;
+        isNotBlock = true;
         
-        while (movable) 
+        while (isNotBlock && isOnWhiteBox == false) 
         {
             if (Physics.Raycast(_currentPosition, direction, 2f))
             {
-                Debug.Log("Hit obstacle");
-                movable = false;
+                Debug.Log("Box hit obstacle");
+                isNotBlock = false;
                 break;
             }
             else
             {
-                movable = true;
+                isNotBlock = true;
             }
             
             SlideBall(direction);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.08f);
 
-            isGrounded = IsOnGround();
+            //isGrounded = IsOnGround();
             
-            if (isGrounded == false)
+            RaycastHit hit;
+            Ray downRay = new Ray(_currentPosition, -Vector3.up);
+
+            if (Physics.Raycast(downRay, out hit))
             {
-                GoDown();
+        
+                while (hit.distance > 2f)
+                {
+                    //Debug.Log(hit.distance);
+                    GoDown();
+                    yield return new WaitForSeconds(0.08f);
+                    hit.distance -= 2;
+                }
+                
             }
-            yield return new WaitForSeconds(0.05f);
+     
         }
         
-        Debug.Log(direction);
+        //Debug.Log(direction);
         
     }
 
@@ -113,24 +125,10 @@ public class CartonBox : MonoBehaviour
     {
         //Vector3 y_direction = new Vector3 (0f, -1f, 0f);
         transform.position = transform.position - Vector3.up * 2;
-        transform.Rotate(-Vector3.up*45f, Space.World);
+        
     }
 
-    bool IsOnGround()
-    {
-        RaycastHit hit;
-        Ray downRay = new Ray(_currentPosition, -Vector3.up);
-
-        if (Physics.Raycast(downRay, out hit))
-        {
-    
-            if (hit.distance > 2f)
-            {
-               return false;
-            }
-        }
-        return true;
-    }
+   
 
     Vector3 GetXorZDirection(Vector3 direction)
     {
@@ -151,15 +149,21 @@ public class CartonBox : MonoBehaviour
  
     void OnTriggerExit(Collider col)
     {
-        
+        if (col.tag == "WhiteBox")
+        {
+            
+            isOnWhiteBox = false;
+        }
         
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "FinishBox")
+        
+        if (col.tag == "WhiteBox")
         {
-            Destroy(gameObject);
+            Debug.Log("Box Collide with whitebox");
+            isOnWhiteBox = true;
         }
     }
 
@@ -177,6 +181,22 @@ public class CartonBox : MonoBehaviour
         }
        
         _currentPosition = transform.position;
+
+        RaycastHit hit;
+        Ray downRay = new Ray(_currentPosition, -Vector3.up);
+
+        if (Physics.Raycast(downRay, out hit))
+        {
+    
+            while (hit.distance > 2f)
+            {
+                //Debug.Log(hit.distance);
+                GoDown();
+                //yield return new WaitForSeconds(0.08f);
+                hit.distance -= 2;
+            }
+            
+        }
         
     }
 }

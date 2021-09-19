@@ -4,32 +4,47 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Transform ball;
-    public Transform box;
+    public GameObject ball;
+    public GameObject finishBox;
+    GameObject [] listBox;
 
     Vector3 ballStartPosition;
-    Vector3 boxStartPosition;
+    Vector3 [] listBoxStartPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        ballStartPosition = ball.position;
-        boxStartPosition = box.position;
+        ballStartPosition = ball.transform.position;
+        listBox = GameObject.FindGameObjectsWithTag("CartonBox");
+        if (listBox.Length != 0)
+        {
+            listBoxStartPosition = new Vector3[listBox.Length];
+            //Debug.Log(listBox.Length);
+            for (int i = 0; i < listBox.Length; i++)
+            {
+                listBoxStartPosition[i] = listBox[i].transform.position;
+            }
+        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     
 
     public void Replay()
     {
+        
         ball.gameObject.SetActive(true);
-        ball.position = ballStartPosition;
-        box.position = boxStartPosition;
+        ball.transform.position = ballStartPosition;
+        for (int i = 0; i < listBox.Length; i++)
+        {
+            listBox[i].transform.position = listBoxStartPosition[i];
+        }
     }
 
     public void Setting()
