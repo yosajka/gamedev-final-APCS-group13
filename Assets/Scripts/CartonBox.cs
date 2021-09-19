@@ -78,6 +78,7 @@ public class CartonBox : MonoBehaviour
         {
             if (Physics.Raycast(_currentPosition, direction, 2f))
             {
+                Debug.DrawRay(_currentPosition, direction, Color.black, 100);
                 Debug.Log("Box hit obstacle");
                 isNotBlock = false;
                 break;
