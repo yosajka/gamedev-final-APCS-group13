@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< Updated upstream
-public class IClickable : MonoBehaviour
+public class Singleton : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,12 +15,4 @@ public class IClickable : MonoBehaviour
     {
         
     }
-=======
-public interface IClickable {
-    void OnLeftClick();
-    void OnRightClick();
-    
-    void OnHoverEnter();
-    void OnHoverExist();
->>>>>>> Stashed changes
 }

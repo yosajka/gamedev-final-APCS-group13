@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class Ball : MonoBehaviour, IClickable
 {
     Rigidbody _rigidBody;
     
@@ -163,6 +163,21 @@ public class Ball : MonoBehaviour
         
     }
 
+    public void OnHoverEnter(){
+       return;
+    }
+
+    public void OnHoverExist(){
+       return;
+    }
+
+    public void OnLeftClick(){
+        return;
+    }
+
+    public void OnRightClick(){
+        return;
+    }
    
 
     
