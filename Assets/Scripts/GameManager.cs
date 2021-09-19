@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 public class GameManager : MonoBehaviour
 {
     public GameObject ball;
@@ -41,13 +42,20 @@ public class GameManager : MonoBehaviour
 
     public void Replay()
     {
-        ball.GetComponent<Rigidbody>().isKinematic = false;
-        ball.gameObject.SetActive(true);
-        ball.transform.position = ballStartPosition;
-        for (int i = 0; i < listBox.Length; i++)
-        {
-            listBox[i].transform.position = listBoxStartPosition[i];
-        }
+        //ball.GetComponent<Rigidbody>().isKinematic = true;
+        
+        // ball.gameObject.SetActive(true);
+        // //ball.transform.position = ballStartPosition;
+        // ball.GetComponent<Rigidbody>().position = ballStartPosition;
+        // for (int i = 0; i < listBox.Length; i++)
+        // {
+        //     listBox[i].transform.position = listBoxStartPosition[i];
+        //     //listBox[i].GetComponent<Rigidbody>().position = listBoxStartPosition[i];
+        // }
+
+        // ball.GetComponent<Rigidbody>().isKinematic = false;
+        Scene scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
     }
     public void ChooseLevel()
     {
@@ -70,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         winCanvas.SetActive(false);
         ingameCanvas.SetActive(true);
+        
         ball.GetComponent<Rigidbody>().isKinematic = false;
         ball.gameObject.SetActive(true);
         ball.transform.position = ballStartPosition;

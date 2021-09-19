@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CartonBox : MonoBehaviour
+public class CartonBox : MonoBehaviour, IClickable
 {
     Rigidbody _rigidBody;
     public AudioSource slidingSound;
@@ -78,6 +78,7 @@ public class CartonBox : MonoBehaviour
         {
             if (Physics.Raycast(_currentPosition, direction, 2f))
             {
+                Debug.DrawRay(_currentPosition, direction, Color.black, 100);
                 Debug.Log("Box hit obstacle");
                 isNotBlock = false;
                 break;
@@ -212,5 +213,27 @@ public class CartonBox : MonoBehaviour
             
         }
         
+    }
+    public void OnMouseEnterHover()
+    {
+        HoverOn();
+        return;
+    }
+
+
+    public void OnMouseExistHover()
+    {
+        HoverOff();
+        return;
+    }
+
+    private void HoverOn()
+    {
+        GetComponentInChildren<Outline>().OutlineWidth = 4;
+    }
+
+    private void HoverOff()
+    {
+        GetComponentInChildren<Outline>().OutlineWidth = 0;
     }
 }

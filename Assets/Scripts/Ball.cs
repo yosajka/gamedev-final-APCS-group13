@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class Ball : MonoBehaviour, IClickable
 {
     public AudioSource winningSound;
     public AudioSource ballRolling;
@@ -218,6 +218,10 @@ public class Ball : MonoBehaviour
                 GameStateManager.Instance.winRound = true;
                 //gameObject.SetActive(false);
             }
+            else
+            {
+                _rigidBody.isKinematic = false;
+            }
         }
         
     }
@@ -238,10 +242,47 @@ public class Ball : MonoBehaviour
         
        
         _currentPosition = transform.position;
+
+        RaycastHit hit;
+        Ray downRay = new Ray(_currentPosition, -Vector3.up);
+
+        if (Physics.Raycast(downRay, out hit))
+        {
+    
+            while (hit.distance > 2f)
+            {
+                //Debug.Log(hit.distance);
+                GoDown();
+                //yield return new WaitForSeconds(0.08f);
+                hit.distance -= 2;
+            }
+            
+        }
         
 
     }
+    public void OnMouseEnterHover()
+    {
+        HoverOn();
+        return;
+    }
 
+
+    public void OnMouseExistHover()
+    {
+        HoverOff();
+        return;
+    }
+
+    private void HoverOn()
+    {
+        GetComponentInChildren<Outline>().OutlineWidth = 4;
+    }
+
+    private void HoverOff()
+    {
+        GetComponentInChildren<Outline>().OutlineWidth = 0;
+    }
    
 
     
