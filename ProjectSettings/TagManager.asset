@@ -12,6 +12,7 @@ TagManager:
   - LeftBox
   - RightBox
   - ForwardBox
+  - BackwardBox
   layers:
   - Default
   - TransparentFX

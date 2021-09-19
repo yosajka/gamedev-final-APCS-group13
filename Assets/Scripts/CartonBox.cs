@@ -165,6 +165,21 @@ public class CartonBox : MonoBehaviour
             Debug.Log("Box Collide with whitebox");
             isOnWhiteBox = true;
         }
+        if (col.tag == "RightBox")
+        {
+            Debug.Log("Ball collide with right box");
+            direction = Vector3.right;
+        }
+        if (col.tag == "LeftBox")
+        {
+            Debug.Log("Ball collide with left box");
+            direction = -Vector3.right;
+        }
+        if (col.tag == "BackwardBox")
+        {
+            Debug.Log("Ball collide with Backward box");
+            direction = -Vector3.forward;
+        }
     }
 
     void OnCollisionExit(Collision col)

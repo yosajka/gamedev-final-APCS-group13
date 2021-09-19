@@ -186,6 +186,16 @@ public class Ball : MonoBehaviour
             Debug.Log("Ball collide with right box");
             direction = Vector3.right;
         }
+        if (col.tag == "LeftBox")
+        {
+            Debug.Log("Ball collide with left box");
+            direction = -Vector3.right;
+        }
+        if (col.tag == "BackwardBox")
+        {
+            Debug.Log("Ball collide with Backward box");
+            direction = -Vector3.forward;
+        }
     }
 
     void OnCollisionEnter(Collision col)
