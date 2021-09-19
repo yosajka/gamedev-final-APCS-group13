@@ -181,6 +181,11 @@ public class Ball : MonoBehaviour
             Debug.Log("Ball Collide with whitebox");
             isOnWhiteBox = true;
         }
+        if (col.tag == "RightBox")
+        {
+            Debug.Log("Ball collide with right box");
+            direction = Vector3.right;
+        }
     }
 
     void OnCollisionEnter(Collision col)
