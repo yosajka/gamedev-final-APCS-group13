@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Skybox
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 66771a0f964a328488e220f5f0328f26, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -67,20 +67,25 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _SkyExponent1: 8.5
+    - _SkyExponent2: 3
+    - _SkyIntensity: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SunAlpha: 550
+    - _SunAltitude: 38
+    - _SunAzimuth: 20
+    - _SunBeta: 1
+    - _SunIntensity: 2
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-<<<<<<< Updated upstream
-=======
-    - _SkyColor1: {r: 1, g: 0.9372916, b: 0.8632076, a: 0}
+    - _SkyColor1: {r: 0.64256, g: 0.43111423, b: 0.7924528, a: 0}
     - _SkyColor2: {r: 0.990566, g: 0.58948183, b: 0.41740823, a: 0}
     - _SkyColor3: {r: 0.9339623, g: 0.5307719, b: 0.48166603, a: 0}
-    - _SunColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SunColor: {r: 1, g: 0.99, b: 0.87, a: 1}
     - _SunVector: {r: 0.269, g: 0.615, b: 0.74, a: 0}
->>>>>>> Stashed changes
   m_BuildTextureStacks: []

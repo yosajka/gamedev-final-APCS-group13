@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour, IClickable
+public class CartonBox : MonoBehaviour
 {
     Rigidbody _rigidBody;
     
@@ -10,9 +10,13 @@ public class Ball : MonoBehaviour, IClickable
     Vector3 direction;
     Vector3 _currentPosition;
     
-    
-    bool isOnGround;
-    bool isNotBlocked = true;
+    //[SerializeField] float _launchForce = 100;
+
+    //Vector3 z_positive = new Vector3 (0,0,1);
+    //Vector3 z_negative = new Vector3 (0,0,-1);
+
+    bool isGrounded;
+    bool isNotBlock = true;
     public bool isOnWhiteBox;
 
     private Vector3 mOffset;
@@ -68,19 +72,19 @@ public class Ball : MonoBehaviour, IClickable
         
         direction = GetXorZDirection(direction);
         
-        isNotBlocked = true;
+        isNotBlock = true;
         
-        while (isNotBlocked && isOnWhiteBox == false) 
+        while (isNotBlock && isOnWhiteBox == false) 
         {
             if (Physics.Raycast(_currentPosition, direction, 2f))
             {
-                Debug.Log("Ball hit obstacle");
-                isNotBlocked = false;
+                Debug.Log("Box hit obstacle");
+                isNotBlock = false;
                 break;
             }
             else
             {
-                isNotBlocked = true;
+                isNotBlock = true;
             }
             
             SlideBall(direction);
@@ -98,23 +102,22 @@ public class Ball : MonoBehaviour, IClickable
                 {
                     //Debug.Log(hit.distance);
                     GoDown();
-                    transform.Rotate(direction*30f, Space.World);
                     yield return new WaitForSeconds(0.08f);
                     hit.distance -= 2;
                 }
                 
             }
+     
         }
         
-        Debug.Log(direction);
+        //Debug.Log(direction);
         
     }
 
     void SlideBall(Vector3 direction)
     {
-        //movable = true;
+        
         transform.position = transform.position + direction * 2;
-        transform.Rotate(direction*30f, Space.World);
         
     }
 
@@ -122,24 +125,10 @@ public class Ball : MonoBehaviour, IClickable
     {
         //Vector3 y_direction = new Vector3 (0f, -1f, 0f);
         transform.position = transform.position - Vector3.up * 2;
-        transform.Rotate(-Vector3.up*45f, Space.World);
+        
     }
 
-    bool IsOnGround()
-    {
-        RaycastHit hit;
-        Ray downRay = new Ray(_currentPosition, -Vector3.up);
-
-        if (Physics.Raycast(downRay, out hit))
-        {
-    
-            if (hit.distance > 2f)
-            {
-               return false;
-            }
-        }
-        return true;
-    }
+   
 
     Vector3 GetXorZDirection(Vector3 direction)
     {
@@ -170,35 +159,12 @@ public class Ball : MonoBehaviour, IClickable
 
     void OnTriggerEnter(Collider col)
     {
-        // if (col.tag == "FinishBox")
-        // {
-        //     //GetComponent<AudioSource>().Play();
-        //     gameObject.SetActive(false);
-        // }
+        
         if (col.tag == "WhiteBox")
         {
-            Debug.Log("Ball Collide with whitebox");
+            Debug.Log("Box Collide with whitebox");
             isOnWhiteBox = true;
         }
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "FinishBox")
-        {
-            //Debug.Log(col.gameObject.tag);
-            //_rigidBody.velocity = Vector3.zero;
-            //_rigidBody.angularVelocity = Vector3.zero; 
-            _rigidBody.isKinematic = true;
-
-            Vector3 collideDir = (col.GetContact(0).point - transform.position).normalized;
-            //Debug.Log(collideDir);
-            if (direction == collideDir)
-            {
-                gameObject.SetActive(false);
-            }
-        }
-        
     }
 
     void OnCollisionExit(Collision col)
@@ -209,34 +175,28 @@ public class Ball : MonoBehaviour, IClickable
     
     void Update()
     {
-        if (transform.position.y < 0) 
+        if (transform.position.y < 0 || transform.position.y > 10) 
         {
-            transform.position = new Vector3 (transform.position.x, 0, transform.position.z);
+            Destroy(gameObject);
         }
-
-        
        
         _currentPosition = transform.position;
-        
 
-    }
+        RaycastHit hit;
+        Ray downRay = new Ray(_currentPosition, -Vector3.up);
 
-    public void OnHoverEnter(){
-       return;
-    }
-
-    public void OnHoverExist(){
-       return;
-    }
-
-    public void OnLeftClick(){
-        return;
-    }
-
-    public void OnRightClick(){
-        return;
-    }
-   
-
+        if (Physics.Raycast(downRay, out hit))
+        {
     
+            while (hit.distance > 2f)
+            {
+                //Debug.Log(hit.distance);
+                GoDown();
+                //yield return new WaitForSeconds(0.08f);
+                hit.distance -= 2;
+            }
+            
+        }
+        
+    }
 }
