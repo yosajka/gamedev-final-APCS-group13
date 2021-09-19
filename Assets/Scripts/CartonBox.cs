@@ -73,7 +73,7 @@ public class CartonBox : MonoBehaviour
         direction = GetXorZDirection(direction);
         
         isNotBlock = true;
-        
+        slidingSound.Play();
         while (isNotBlock && isOnWhiteBox == false) 
         {
             if (Physics.Raycast(_currentPosition, direction, 2f))
@@ -118,7 +118,7 @@ public class CartonBox : MonoBehaviour
     {
         
         transform.position = transform.position + direction * 2;
-        slidingSound.Play();
+        
     }
 
     void GoDown()
