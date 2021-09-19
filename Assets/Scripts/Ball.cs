@@ -5,6 +5,8 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public AudioSource winningSound;
+    public GameObject IngameCanvas;
+    public GameObject WinCanvas;
     Rigidbody _rigidBody;
     
     Vector3 _startPosition;
@@ -200,6 +202,8 @@ public class Ball : MonoBehaviour
                 winningSound.Play();
                 transform.position = transform.position + direction * 2;
                 transform.Rotate(direction * 30f, Space.World);
+                IngameCanvas.SetActive(false);
+                WinCanvas.SetActive(true);
                 //gameObject.SetActive(false);
             }
         }

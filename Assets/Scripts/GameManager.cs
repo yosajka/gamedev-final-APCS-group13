@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject ball;
     public GameObject finishBox;
+    public GameObject winCanvas;
     GameObject [] listBox;
 
     Vector3 ballStartPosition;
@@ -57,5 +58,16 @@ public class GameManager : MonoBehaviour
 
     }
 
-    
+    public void ReplayAfterWinning()
+    {
+        winCanvas.SetActive(false);
+        ball.GetComponent<Rigidbody>().isKinematic = false;
+        ball.gameObject.SetActive(true);
+        ball.transform.position = ballStartPosition;
+        for (int i = 0; i < listBox.Length; i++)
+        {
+            listBox[i].transform.position = listBoxStartPosition[i];
+        }
+    }
+
 }
