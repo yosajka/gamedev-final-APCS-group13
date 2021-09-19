@@ -6,8 +6,6 @@ public class Ball : MonoBehaviour
 {
     public AudioSource winningSound;
     public AudioSource ballRolling;
-    public GameObject IngameCanvas;
-    public GameObject WinCanvas;
     Rigidbody _rigidBody;
     
     Vector3 _startPosition;
@@ -214,10 +212,10 @@ public class Ball : MonoBehaviour
             if (direction == collideDir)
             {
                 Debug.Log("hit");
+                Debug.Log(direction);
                 winningSound.Play();
-                transform.position = transform.position + direction * 2;
-                IngameCanvas.SetActive(false);
-                WinCanvas.SetActive(true);
+                transform.position = transform.position + direction*2;
+                GameStateManager.Instance.winRound = true;
                 //gameObject.SetActive(false);
             }
         }

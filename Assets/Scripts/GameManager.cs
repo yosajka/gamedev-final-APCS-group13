@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject ball;
@@ -9,9 +10,11 @@ public class GameManager : MonoBehaviour
     public GameObject winCanvas;
     public GameObject ingameCanvas;
     GameObject [] listBox;
-
+    GameObject g;
     Vector3 ballStartPosition;
     Vector3 [] listBoxStartPosition;
+    [SerializeField] Transform LevelScrollView;
+    [SerializeField] GameObject LevelTemplate;
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +30,11 @@ public class GameManager : MonoBehaviour
                 listBoxStartPosition[i] = listBox[i].transform.position;
             }
         }
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-       
     }
 
     
@@ -48,10 +49,16 @@ public class GameManager : MonoBehaviour
             listBox[i].transform.position = listBoxStartPosition[i];
         }
     }
+    public void ChooseLevel()
+    {
+        winCanvas.SetActive(true);
+        ingameCanvas.SetActive(false);
+        GameStateManager.Instance.winRound = true;
+    }
 
     public void Setting()
     {
-
+        
     }
 
     public void ExitToMenu()
@@ -71,5 +78,6 @@ public class GameManager : MonoBehaviour
             listBox[i].transform.position = listBoxStartPosition[i];
         }
     }
+
 
 }

@@ -118,7 +118,6 @@ public class CartonBox : MonoBehaviour
     {
         
         transform.position = transform.position + direction * 2;
-        
     }
 
     void GoDown()
