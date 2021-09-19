@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public AudioSource winningSound;
     Rigidbody _rigidBody;
     
     Vector3 _startPosition;
@@ -22,7 +23,7 @@ public class Ball : MonoBehaviour
     void Awake() 
     {
         _rigidBody = GetComponent<Rigidbody>();
-        
+        winningSound = GetComponent<AudioSource>();
         
     }
     void Start()
@@ -195,7 +196,11 @@ public class Ball : MonoBehaviour
             //Debug.Log(collideDir);
             if (direction == collideDir)
             {
-                gameObject.SetActive(false);
+                Debug.Log("hit");
+                winningSound.Play();
+                transform.position = transform.position + direction * 2;
+                transform.Rotate(direction * 30f, Space.World);
+                //gameObject.SetActive(false);
             }
         }
         

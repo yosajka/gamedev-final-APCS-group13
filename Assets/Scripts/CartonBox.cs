@@ -5,7 +5,7 @@ using UnityEngine;
 public class CartonBox : MonoBehaviour
 {
     Rigidbody _rigidBody;
-    
+    public AudioSource slidingSound;
     Vector3 _startPosition;
     Vector3 direction;
     Vector3 _currentPosition;
@@ -26,7 +26,7 @@ public class CartonBox : MonoBehaviour
     void Awake() 
     {
         _rigidBody = GetComponent<Rigidbody>();
-        
+        slidingSound = GetComponent<AudioSource>();
         
     }
     void Start()
@@ -118,7 +118,7 @@ public class CartonBox : MonoBehaviour
     {
         
         transform.position = transform.position + direction * 2;
-        
+        slidingSound.Play();
     }
 
     void GoDown()
