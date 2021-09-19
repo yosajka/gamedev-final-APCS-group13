@@ -106,7 +106,7 @@ public class Ball : MonoBehaviour
             }
         }
         
-        //Debug.Log(direction);
+        Debug.Log(direction);
         
     }
 
@@ -170,16 +170,35 @@ public class Ball : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "FinishBox")
-        {
-            //GetComponent<AudioSource>().Play();
-            gameObject.SetActive(false);
-        }
+        // if (col.tag == "FinishBox")
+        // {
+        //     //GetComponent<AudioSource>().Play();
+        //     gameObject.SetActive(false);
+        // }
         if (col.tag == "WhiteBox")
         {
             Debug.Log("Ball Collide with whitebox");
             isOnWhiteBox = true;
         }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "FinishBox")
+        {
+            //Debug.Log(col.gameObject.tag);
+            //_rigidBody.velocity = Vector3.zero;
+            //_rigidBody.angularVelocity = Vector3.zero; 
+            _rigidBody.isKinematic = true;
+
+            Vector3 collideDir = (col.GetContact(0).point - transform.position).normalized;
+            //Debug.Log(collideDir);
+            if (direction == collideDir)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        
     }
 
     void OnCollisionExit(Collision col)
@@ -194,9 +213,12 @@ public class Ball : MonoBehaviour
         {
             transform.position = new Vector3 (transform.position.x, 0, transform.position.z);
         }
+
+        
        
         _currentPosition = transform.position;
         
+
     }
 
    

@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void Replay()
     {
-        
+        ball.GetComponent<Rigidbody>().isKinematic = false;
         ball.gameObject.SetActive(true);
         ball.transform.position = ballStartPosition;
         for (int i = 0; i < listBox.Length; i++)
