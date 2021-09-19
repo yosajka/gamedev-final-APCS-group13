@@ -9,6 +9,10 @@ TagManager:
   - FinishBox
   - CartonBox
   - WhiteBox
+  - LeftBox
+  - RightBox
+  - ForwardBox
+  - BackwardBox
   layers:
   - Default
   - TransparentFX

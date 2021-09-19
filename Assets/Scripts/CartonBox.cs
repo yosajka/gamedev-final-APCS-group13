@@ -73,7 +73,7 @@ public class CartonBox : MonoBehaviour
         direction = GetXorZDirection(direction);
         
         isNotBlock = true;
-        
+        slidingSound.Play();
         while (isNotBlock && isOnWhiteBox == false) 
         {
             if (Physics.Raycast(_currentPosition, direction, 2f))
@@ -118,7 +118,7 @@ public class CartonBox : MonoBehaviour
     {
         
         transform.position = transform.position + direction * 2;
-        slidingSound.Play();
+        
     }
 
     void GoDown()
@@ -164,6 +164,21 @@ public class CartonBox : MonoBehaviour
         {
             Debug.Log("Box Collide with whitebox");
             isOnWhiteBox = true;
+        }
+        if (col.tag == "RightBox")
+        {
+            Debug.Log("Ball collide with right box");
+            direction = Vector3.right;
+        }
+        if (col.tag == "LeftBox")
+        {
+            Debug.Log("Ball collide with left box");
+            direction = -Vector3.right;
+        }
+        if (col.tag == "BackwardBox")
+        {
+            Debug.Log("Ball collide with Backward box");
+            direction = -Vector3.forward;
         }
     }
 
