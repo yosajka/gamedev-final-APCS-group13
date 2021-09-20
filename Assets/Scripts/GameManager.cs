@@ -40,13 +40,18 @@ public class GameManager : MonoBehaviour
 
     public void Replay()
     {
-        ball.GetComponent<Rigidbody>().isKinematic = false;
+        //ball.GetComponent<Rigidbody>().isKinematic = true;
+        
         ball.gameObject.SetActive(true);
-        ball.transform.position = ballStartPosition;
+        //ball.transform.position = ballStartPosition;
+        ball.GetComponent<Rigidbody>().position = ballStartPosition;
         for (int i = 0; i < listBox.Length; i++)
         {
             listBox[i].transform.position = listBoxStartPosition[i];
+            //listBox[i].GetComponent<Rigidbody>().position = listBoxStartPosition[i];
         }
+
+        ball.GetComponent<Rigidbody>().isKinematic = false;
     }
 
     public void Setting()
