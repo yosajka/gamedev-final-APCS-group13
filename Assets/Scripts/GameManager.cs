@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         winCanvas.SetActive(false);
         ingameCanvas.SetActive(true);
+        ball.GetComponent<Rigidbody>().isKinematic = true;
         ball.GetComponent<Rigidbody>().isKinematic = false;
         ball.gameObject.SetActive(true);
         ball.transform.position = ballStartPosition;
