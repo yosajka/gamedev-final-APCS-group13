@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class Ball : MonoBehaviour, IClickable
 {
     public AudioSource winningSound;
     public AudioSource ballRolling;
@@ -243,7 +243,28 @@ public class Ball : MonoBehaviour
         
 
     }
+    public void OnMouseEnterHover()
+    {
+        HoverOn();
+        return;
+    }
 
+
+    public void OnMouseExistHover()
+    {
+        HoverOff();
+        return;
+    }
+
+    private void HoverOn()
+    {
+        GetComponentInChildren<Outline>().OutlineWidth = 4;
+    }
+
+    private void HoverOff()
+    {
+        GetComponentInChildren<Outline>().OutlineWidth = 0;
+    }
    
 
     
