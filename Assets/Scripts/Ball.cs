@@ -244,6 +244,22 @@ public class Ball : MonoBehaviour
         
        
         _currentPosition = transform.position;
+
+        RaycastHit hit;
+        Ray downRay = new Ray(_currentPosition, -Vector3.up);
+
+        if (Physics.Raycast(downRay, out hit))
+        {
+    
+            while (hit.distance > 2f)
+            {
+                //Debug.Log(hit.distance);
+                GoDown();
+                //yield return new WaitForSeconds(0.08f);
+                hit.distance -= 2;
+            }
+            
+        }
         
 
     }
