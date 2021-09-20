@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IClickable {
+public interface IClickable
+{
     void OnLeftClick();
-    void OnRightClick();
-    
-    void OnHoverEnter();
-    void OnHoverExist();
+
+    void OnMouseEnterHover();
+    void OnMouseExistHover();
+
+    void OnRightClickDown();
+    void OnRightClickUp();
 }

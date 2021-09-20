@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static InputManager _instance;
+
+    public delegate void InputEvent();
+    public static event InputEvent OnPressUp;
+    public static event InputEvent OnPressDown;
+    public static event InputEvent OnTap;
     void Start()
     {
-        
+        if (_instance == null) _instance = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (OnPressUp != null) OnPressUp();
+        }
     }
+
 }

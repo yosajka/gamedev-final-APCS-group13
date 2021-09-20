@@ -9,6 +9,7 @@ TagManager:
   - FinishBox
   - CartonBox
   - WhiteBox
+  - InvisibleWall
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - InvisibleWall
   - 
   - 
   - 
