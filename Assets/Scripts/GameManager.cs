@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,16 +43,18 @@ public class GameManager : MonoBehaviour
     {
         //ball.GetComponent<Rigidbody>().isKinematic = true;
         
-        ball.gameObject.SetActive(true);
-        //ball.transform.position = ballStartPosition;
-        ball.GetComponent<Rigidbody>().position = ballStartPosition;
-        for (int i = 0; i < listBox.Length; i++)
-        {
-            listBox[i].transform.position = listBoxStartPosition[i];
-            //listBox[i].GetComponent<Rigidbody>().position = listBoxStartPosition[i];
-        }
+        // ball.gameObject.SetActive(true);
+        // //ball.transform.position = ballStartPosition;
+        // ball.GetComponent<Rigidbody>().position = ballStartPosition;
+        // for (int i = 0; i < listBox.Length; i++)
+        // {
+        //     listBox[i].transform.position = listBoxStartPosition[i];
+        //     //listBox[i].GetComponent<Rigidbody>().position = listBoxStartPosition[i];
+        // }
 
-        ball.GetComponent<Rigidbody>().isKinematic = false;
+        // ball.GetComponent<Rigidbody>().isKinematic = false;
+        Scene scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
     }
 
     public void Setting()
@@ -68,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         winCanvas.SetActive(false);
         ingameCanvas.SetActive(true);
-        ball.GetComponent<Rigidbody>().isKinematic = true;
+        
         ball.GetComponent<Rigidbody>().isKinematic = false;
         ball.gameObject.SetActive(true);
         ball.transform.position = ballStartPosition;
