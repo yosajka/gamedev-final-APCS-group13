@@ -220,6 +220,10 @@ public class Ball : MonoBehaviour
                 WinCanvas.SetActive(true);
                 //gameObject.SetActive(false);
             }
+            else
+            {
+                _rigidBody.isKinematic = false;
+            }
         }
         
     }
